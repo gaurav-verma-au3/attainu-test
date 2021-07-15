@@ -16,8 +16,7 @@ async function startServer() {
   const app = express();
   app.use(graphqlUploadExpress());
   server.applyMiddleware({ app });
-  await new Promise((r) => app.listen({ port: 4000 }, r));
-  console.log(`http://localhost:4000${server.graphqlPath}`);
+  await new Promise((r) => app.listen({ port: process.env.PORT || 4000 }, r));
   if (process.env.NODE_ENV === "production") {
     app.use(express.static("build"));
     app.get("*", (req, res) => {
